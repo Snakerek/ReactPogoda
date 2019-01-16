@@ -10,15 +10,28 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { lat: null };
+		this.state = { lat: null, errorMessage: '' };
+
+		window.navigator.geolocation.getCurrentPosition(
+			(position) => {
+				this.setState({ lat: position.coords.latitude });
+			}, //w przypadku prawidłowego pobrania lokalizacji
+			(err) => {
+				this.setState({ errorMessage: err.message });
+			}
+		); //w przypadku błędu w pobieraniu lokalizacji
 	}
+
 	// render() jest funkcją konieczną dla Reacta do zadziałania
 	render() {
-		window.navigator.geolocation.getCurrentPosition(
-			(position) => console.log(position), //w przypadku prawidłowego pobrania lokalizacji
-			(err) => console.log(err)
-		); //w przypadku błędu w pobieraniu lokalizacji
-		return <div>Latitude:</div>;
+		if (this.state.errorMessage && !this.state.lat) {
+			return <div>Error: {this.state.errorMessage}</div>;
+		}
+		if (!this.state.errorMessage && this.state.lat) {
+			return <div>Latitude: {this.state.lat}</div>;
+		}
+
+		return <div>Loading...</div>;
 	}
 }
 //Wyświetlenie komponentu na ekranie
