@@ -19,8 +19,8 @@ class App extends React.Component {
 			}
 		); //w przypadku błędu w pobieraniu lokalizacji
 	}
-	// render() jest funkcją konieczną dla Reacta do zadziałania
-	render() {
+
+	renderContent() {
 		if (this.state.errorMessage && !this.state.lat) {
 			return <div>Error: {this.state.errorMessage}</div>;
 		}
@@ -33,6 +33,11 @@ class App extends React.Component {
 		}
 
 		return <Spinner message="Proszę zaakceptuj zapytanie o lokalizację..." />;
+	}
+
+	// render() jest funkcją konieczną dla Reacta do zadziałania
+	render() {
+		return <div className="border red">{this.renderContent()}</div>;
 	}
 }
 //Wyświetlenie komponentu na ekranie
