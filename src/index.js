@@ -32,7 +32,7 @@ class App extends React.Component {
 			);
 		}
 
-		return <Spinner />;
+		return <Spinner message="Proszę zaakceptuj zapytanie o lokalizację..." />;
 	}
 }
 //Wyświetlenie komponentu na ekranie
