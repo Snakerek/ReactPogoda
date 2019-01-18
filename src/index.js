@@ -6,11 +6,8 @@ import ReactDOM from 'react-dom';
 // Utworzenie komponentu React
 
 class App extends React.Component {
-	//konstruktor obiektu. Za każdym razem należy odwołać się do props nadrzędnych tak jak poniżej
-	constructor(props) {
-		super(props);
-		this.state = { lat: null, errorMessage: '' };
-	}
+	//Babel refaktoryzuje kod jacascript i dodaje state do konstruktora
+	state = { lat: null, errorMessage: '' };
 	componentDidMount() {
 		window.navigator.geolocation.getCurrentPosition(
 			(position) => {
