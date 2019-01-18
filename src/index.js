@@ -9,9 +9,9 @@ class App extends React.Component {
 	//konstruktor obiektu. Za każdym razem należy odwołać się do props nadrzędnych tak jak poniżej
 	constructor(props) {
 		super(props);
-
 		this.state = { lat: null, errorMessage: '' };
-
+	}
+	componentDidMount() {
 		window.navigator.geolocation.getCurrentPosition(
 			(position) => {
 				this.setState({ lat: position.coords.latitude });
@@ -21,7 +21,6 @@ class App extends React.Component {
 			}
 		); //w przypadku błędu w pobieraniu lokalizacji
 	}
-
 	// render() jest funkcją konieczną dla Reacta do zadziałania
 	render() {
 		if (this.state.errorMessage && !this.state.lat) {
